@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Plano de Hora Extra — Noturno · até 08:48</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night:#15163a;
+    --night2:#2a2566;
+    --dawn:#ff9e2c;
+    --dawn2:#ffd24a;
+    --dawn-deep:#e07d10;
+    --paper:#fbf8f1;
+    --card:#ffffff;
+    --ink:#1b1a24;
+    --ink-soft:#5b5868;
+    --line:#e6e1d6;
+    --conf:#2f6db0;
+    --conf-bg:#eef4fb;
+    --sep:#1f9c63;
+    --sep-bg:#ecf8f1;
+    --ferias:#3b82f6;
+    --reserva:#a16207;
+    --disp:Oswald, "Inter", sans-serif;
+    --sans:Inter, system-ui, sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#d9d4c8;color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+
+  .sheet{
+    width:297mm;min-height:210mm;margin:14px auto;background:var(--paper);
+    box-shadow:0 18px 50px rgba(0,0,0,.28);overflow:hidden;
+    display:flex;flex-direction:column;
+  }
+
+  /* ---------- HEADER ---------- */
+  .head{
+    position:relative;color:#fff;padding:15px 22px 16px;
+    background:
+      radial-gradient(120% 140% at 88% 30%, rgba(255,210,74,.85), transparent 46%),
+      radial-gradient(90% 120% at 96% 60%, rgba(255,158,44,.9), transparent 40%),
+      linear-gradient(95deg, var(--night) 0%, var(--night2) 48%, #6a3f8f 70%, var(--dawn) 100%);
+    display:grid;grid-template-columns:1fr auto;align-items:center;gap:18px;
+  }
+  .head::after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;
+    background:linear-gradient(90deg, var(--night2), var(--dawn2) 70%, #fff)}
+  .eyebrow{font-family:var(--disp);font-weight:600;letter-spacing:.32em;text-transform:uppercase;
+    font-size:12px;color:var(--dawn2);display:flex;align-items:center;gap:9px;margin-bottom:4px}
+  .eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--dawn2);box-shadow:0 0 10px var(--dawn2)}
+  .title{font-family:var(--disp);font-weight:700;line-height:.95;text-transform:uppercase;font-size:38px;letter-spacing:.01em}
+  .title small{display:block;font-size:14.5px;font-weight:500;letter-spacing:.04em;color:#e8e6f5;margin-top:6px;text-transform:none}
+  .title small b{color:var(--dawn2);font-weight:700}
+  .clock{text-align:right;line-height:1}
+  .clock .ate{font-family:var(--disp);font-weight:500;letter-spacing:.22em;text-transform:uppercase;font-size:13px;color:#fff;opacity:.9}
+  .clock .time{font-family:var(--disp);font-weight:700;font-size:74px;letter-spacing:-.01em;color:#fff;
+    text-shadow:0 3px 0 rgba(0,0,0,.18);display:flex;align-items:center;gap:6px;justify-content:flex-end}
+  .clock .time .sun{font-size:40px;filter:drop-shadow(0 0 12px rgba(255,210,74,.8))}
+  .clock .lbl{font-family:var(--disp);letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--dawn2);margin-top:2px}
+
+  /* ---------- STRIP ---------- */
+  .strip{display:flex;align-items:center;gap:13px;flex-wrap:wrap;padding:9px 22px;background:#fff;border-bottom:1px solid var(--line);font-size:12.5px;color:var(--ink-soft)}
+  .strip b{color:var(--ink)}
+  .strip .pk{color:var(--dawn-deep);font-weight:700}
+  .strip .chip{font-family:var(--disp);font-weight:600;text-transform:uppercase;letter-spacing:.08em;font-size:11px;padding:3px 9px;border-radius:4px;color:#fff;background:var(--night2)}
+  .strip .chip.pico{background:linear-gradient(180deg,var(--dawn),var(--dawn-deep))}
+  .strip .pipe{width:1px;height:16px;background:var(--line)}
+
+  /* ---------- BODY ---------- */
+  .body{flex:1;display:grid;grid-template-columns:1fr 232px;gap:0}
+  .grid-wrap{padding:13px 18px 14px}
+  .side{background:#fff;border-left:1px solid var(--line);padding:13px 16px;display:flex;flex-direction:column;gap:12px}
+
+  .gridtitle{font-family:var(--disp);font-weight:600;text-transform:uppercase;letter-spacing:.14em;font-size:13px;color:var(--ink-soft);margin:0 2px 8px;display:flex;align-items:center;gap:8px}
+  .gridtitle::after{content:"";flex:1;height:1px;background:var(--line)}
+
+  table.escala{width:100%;border-collapse:separate;border-spacing:5px;table-layout:fixed}
+  table.escala th{font-family:var(--disp);font-weight:600;text-transform:uppercase;letter-spacing:.06em;font-size:13px;color:#fff;padding:6px 4px 7px;border-radius:6px 6px 0 0;background:linear-gradient(180deg,var(--night2),var(--night));position:relative}
+  table.escala th.peak{background:linear-gradient(180deg,var(--dawn),var(--dawn-deep));color:#241400}
+  table.escala th .count{display:block;font-size:9px;letter-spacing:.12em;font-weight:600;margin-top:2px;color:var(--dawn2)}
+  table.escala th.peak .count{color:#3a1f00}
+  table.escala th .ptag{display:inline-block;font-size:8.5px;letter-spacing:.1em;font-weight:700;margin-top:3px;padding:1px 6px;border-radius:99px;background:rgba(0,0,0,.22)}
+  table.escala th.peak .ptag{background:rgba(0,0,0,.16);color:#241400}
+
+  .rolecell{width:96px;font-family:var(--disp);font-weight:700;text-transform:uppercase;letter-spacing:.04em;font-size:13px;color:#fff;text-align:left;padding:10px 11px;border-radius:6px;vertical-align:middle}
+  .rolecell.conf{background:var(--conf)}
+  .rolecell.sep{background:var(--sep)}
+  .rolecell small{display:block;font-weight:400;font-size:9.5px;letter-spacing:.02em;opacity:.9;text-transform:none;margin-top:3px;line-height:1.3}
+
+  td.slot{background:var(--card);border:1.5px solid var(--line);border-radius:7px;padding:7px 8px 8px;vertical-align:top}
+  tr.conf-row td.slot{background:var(--conf-bg);border-color:#d3e2f3}
+  tr.sep-row  td.slot{background:var(--sep-bg);border-color:#cdeede}
+  td.slot.peak{border-top:3px solid var(--dawn)}
+  .name{font-family:var(--sans);font-weight:700;font-size:13px;color:var(--ink);line-height:1.15;padding:2.5px 0;border-bottom:1px dashed rgba(0,0,0,.10)}
+  .name:last-child{border-bottom:none}
+  .check{display:inline-block;width:11px;height:11px;border:1.5px solid var(--ink-soft);border-radius:3px;margin-right:6px;vertical-align:-1px}
+
+  /* ---------- LATERAL ---------- */
+  .panel h3{font-family:var(--disp);font-weight:600;text-transform:uppercase;letter-spacing:.12em;font-size:12px;color:var(--ink-soft);margin-bottom:6px;display:flex;align-items:center;gap:7px}
+  .panel h3 .b{width:14px;height:14px;border-radius:4px;background:var(--dawn)}
+  .roster{display:flex;flex-direction:column;gap:3px}
+  .rline{display:flex;justify-content:space-between;align-items:center;font-size:11.5px;gap:8px}
+  .rline .nm{font-weight:600;color:var(--ink)}
+  .rline .tag{font-family:var(--disp);font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;padding:2px 6px;border-radius:99px;color:#fff;white-space:nowrap}
+  .tag.conf{background:var(--conf)}
+  .tag.sep{background:var(--sep)}
+  .tag.ferias{background:var(--ferias)}
+  .tag.reserva{background:var(--reserva)}
+  .rules{list-style:none;display:flex;flex-direction:column;gap:6px}
+  .rules li{position:relative;padding-left:19px;font-size:11.5px;color:var(--ink);line-height:1.32}
+  .rules li::before{content:"▸";position:absolute;left:2px;top:0;color:var(--dawn);font-weight:700}
+  .rules b{color:var(--ink)}
+  .rules .hot::before{content:"🔺";font-size:9px;left:1px}
+  .note{background:#fff7e8;border:1px solid #f3dca8;border-left:4px solid var(--dawn);border-radius:6px;padding:8px 11px;font-size:11px;color:#6b5114;line-height:1.4}
+
+  /* ---------- RODAPÉ ---------- */
+  .foot{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;align-items:end;padding:11px 22px 15px;border-top:2px solid var(--night);background:#fff}
+  .sig .ln{border-bottom:1.5px solid var(--ink);height:32px;margin-bottom:4px}
+  .sig .cap{font-family:var(--disp);text-transform:uppercase;letter-spacing:.1em;font-size:10px;color:var(--ink-soft)}
+  .foot .meta{text-align:right;font-size:11px;color:var(--ink-soft);line-height:1.5}
+  .foot .meta b{color:var(--ink);font-family:var(--disp);letter-spacing:.04em}
+  .legend{display:flex;gap:12px;flex-wrap:wrap;font-size:10px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em;font-family:var(--disp)}
+  .legend span{display:inline-flex;align-items:center;gap:5px}
+  .legend i{width:11px;height:11px;border-radius:3px;display:inline-block}
+
+  /* ---------- PRINT ---------- */
+  @page{size:A4 landscape;margin:0}
+  @media print{
+    html,body{background:#fff}
+    .sheet{margin:0;box-shadow:none;width:100%;min-height:auto}
+    .printhide{display:none!important}
+    .head, .rolecell, table.escala th, tr.conf-row td.slot, tr.sep-row td.slot, td.slot.peak, .tag, .note, .strip .chip{
+      -webkit-print-color-adjust:exact;print-color-adjust:exact;
+    }
+  }
+  .printbar{max-width:297mm;margin:10px auto 0;display:flex;justify-content:flex-end;gap:8px;padding:0 4px}
+  .printbar button{font-family:var(--disp);text-transform:uppercase;letter-spacing:.08em;font-size:12px;font-weight:600;background:var(--night2);color:#fff;border:none;border-radius:6px;padding:9px 16px;cursor:pointer}
+  .printbar button:hover{background:var(--night)}
+</style>
+</head>
+<body>
+
+<div class="printbar printhide">
+  <button onclick="window.print()">🖨️ Imprimir / Salvar PDF</button>
+</div>
+
+<div class="sheet">
+
+  <header class="head">
+    <div>
+      <div class="eyebrow"><span class="dot"></span>Plano de ação · Logística</div>
+      <h1 class="title">Hora Extra · Noturno
+        <small>Escala com <b>reforço em Qua · Qui · Sex</b> (dias de pico) — permanência até o amanhecer</small>
+      </h1>
+    </div>
+    <div class="clock">
+      <div class="ate">Permanência até</div>
+      <div class="time"><span class="sun">🌅</span>08:48</div>
+      <div class="lbl">da manhã</div>
+    </div>
+  </header>
+
+  <div class="strip">
+    <span class="chip pico">🔺 Pico</span>
+    <span><b class="pk">Qua, Qui e Sex</b> = dias de maior fluxo: <b>8 pessoas/dia</b> (4 conf + 4 sep).</span>
+    <span class="pipe"></span>
+    <span class="chip">Normal</span>
+    <span><b>Seg, Ter e Sáb</b>: <b>4 pessoas/dia</b> (2 + 2).</span>
+    <span class="pipe"></span>
+    <span>Rodízio justo: <b>cada pessoa fica 3× na semana</b> · marque o <span class="check"></span> ao confirmar.</span>
+  </div>
+
+  <div class="body">
+    <div class="grid-wrap">
+      <div class="gridtitle">Escala semanal · time de plantão 08:48</div>
+      <table class="escala">
+        <thead>
+          <tr>
+            <th style="background:transparent;border:none"></th>
+            <th>Seg<span class="count">4 pessoas</span><span class="ptag">Normal</span></th>
+            <th>Ter<span class="count">4 pessoas</span><span class="ptag">Normal</span></th>
+            <th class="peak">Qua<span class="count">8 pessoas</span><span class="ptag">🔺 Pico</span></th>
+            <th class="peak">Qui<span class="count">8 pessoas</span><span class="ptag">🔺 Pico</span></th>
+            <th class="peak">Sex<span class="count">8 pessoas</span><span class="ptag">🔺 Pico</span></th>
+            <th>Sáb<span class="count">4 pessoas</span><span class="ptag">Normal</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="conf-row">
+            <td class="rolecell conf">Conferência<small>2 normal<br>4 no pico</small></td>
+            <td class="slot"><div class="name"><span class="check"></span>Osvaldo</div><div class="name"><span class="check"></span>Maicon</div></td>
+            <td class="slot"><div class="name"><span class="check"></span>Michel</div><div class="name"><span class="check"></span>Danilo</div></td>
+            <td class="slot peak"><div class="name"><span class="check"></span>Michel</div><div class="name"><span class="check"></span>Danilo</div><div class="name"><span class="check"></span>Laerte</div><div class="name"><span class="check"></span>John Mike</div></td>
+            <td class="slot peak"><div class="name"><span class="check"></span>Osvaldo</div><div class="name"><span class="check"></span>Maicon</div><div class="name"><span class="check"></span>Laerte</div><div class="name"><span class="check"></span>John Mike</div></td>
+            <td class="slot peak"><div class="name"><span class="check"></span>Osvaldo</div><div class="name"><span class="check"></span>Maicon</div><div class="name"><span class="check"></span>Michel</div><div class="name"><span class="check"></span>Danilo</div></td>
+            <td class="slot"><div class="name"><span class="check"></span>Laerte</div><div class="name"><span class="check"></span>John Mike</div></td>
+          </tr>
+          <tr class="sep-row">
+            <td class="rolecell sep">Separação<small>2 normal<br>4 no pico</small></td>
+            <td class="slot"><div class="name"><span class="check"></span>Rodrigo Souza</div><div class="name"><span class="check"></span>Leônidas</div></td>
+            <td class="slot"><div class="name"><span class="check"></span>Silvio Gomes</div><div class="name"><span class="check"></span>Wesley</div></td>
+            <td class="slot peak"><div class="name"><span class="check"></span>Silvio Gomes</div><div class="name"><span class="check"></span>Wesley</div><div class="name"><span class="check"></span>Carlos Alberto</div><div class="name"><span class="check"></span>Josemar</div></td>
+            <td class="slot peak"><div class="name"><span class="check"></span>Rodrigo Souza</div><div class="name"><span class="check"></span>Leônidas</div><div class="name"><span class="check"></span>Carlos Alberto</div><div class="name"><span class="check"></span>Josemar</div></td>
+            <td class="slot peak"><div class="name"><span class="check"></span>Rodrigo Souza</div><div class="name"><span class="check"></span>Leônidas</div><div class="name"><span class="check"></span>Silvio Gomes</div><div class="name"><span class="check"></span>Wesley</div></td>
+            <td class="slot"><div class="name"><span class="check"></span>Carlos Alberto</div><div class="name"><span class="check"></span>Josemar</div></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="legend" style="margin-top:10px">
+        <span><i style="background:var(--conf)"></i>Conferência</span>
+        <span><i style="background:var(--sep)"></i>Separação</span>
+        <span><i style="background:var(--dawn)"></i>Dia de pico</span>
+        <span><i style="background:var(--ferias)"></i>Férias</span>
+        <span><i style="background:var(--reserva)"></i>Reserva</span>
+        <span style="margin-left:auto;text-transform:none;letter-spacing:0">▸ Cada pessoa: 3 dias/semana</span>
+      </div>
+    </div>
+
+    <aside class="side">
+      <div class="panel">
+        <h3><span class="b"></span>Equipe da noite</h3>
+        <div class="roster">
+          <div class="rline"><span class="nm">Osvaldo</span><span class="tag conf">Conf</span></div>
+          <div class="rline"><span class="nm">Maicon</span><span class="tag conf">Conf</span></div>
+          <div class="rline"><span class="nm">Michel</span><span class="tag conf">Conf</span></div>
+          <div class="rline"><span class="nm">Danilo</span><span class="tag conf">Conf</span></div>
+          <div class="rline"><span class="nm">Laerte</span><span class="tag conf">Conf</span></div>
+          <div class="rline"><span class="nm">John Mike</span><span class="tag conf">Conf</span></div>
+          <div class="rline"><span class="nm">Rodrigo Souza</span><span class="tag sep">Sep</span></div>
+          <div class="rline"><span class="nm">Leônidas</span><span class="tag sep">Sep</span></div>
+          <div class="rline"><span class="nm">Silvio Gomes</span><span class="tag sep">Sep</span></div>
+          <div class="rline"><span class="nm">Wesley</span><span class="tag sep">Sep</span></div>
+          <div class="rline"><span class="nm">Carlos Alberto</span><span class="tag sep">Sep</span></div>
+          <div class="rline"><span class="nm">Josemar</span><span class="tag sep">Sep</span></div>
+          <div class="rline" style="margin-top:3px;padding-top:4px;border-top:1px dashed var(--line)"><span class="nm">Cassio Freitas</span><span class="tag ferias">Férias</span></div>
+          <div class="rline"><span class="nm">Lucas Souza</span><span class="tag reserva">Reserva</span></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3><span class="b"></span>Regras</h3>
+        <ul class="rules">
+          <li>Escalado <b>permanece até as 08:48</b>, sem exceção.</li>
+          <li class="hot"><b>Qua, Qui e Sex são pico</b>: ninguém sai sem reposição.</li>
+          <li>Saída antecipada só com <b>aval do Jefferson</b>.</li>
+          <li>Faltou alguém no pico? entra o <b>reserva (Lucas)</b>.</li>
+          <li>Trocou de dia? <b>anote a troca</b> no quadro.</li>
+        </ul>
+      </div>
+
+      <div class="note">
+        <b>Base de rodízio.</b> Ajuste à mão os nomes e a quantidade por dia conforme o volume da madrugada.
+      </div>
+    </aside>
+  </div>
+
+  <footer class="foot">
+    <div class="sig"><div class="ln"></div><div class="cap">Técnico responsável · Jefferson</div></div>
+    <div class="sig"><div class="ln"></div><div class="cap">Vigência · de ____/____ a ____/____</div></div>
+    <div class="meta">
+      <b>HORA EXTRA · NOTURNO</b><br>
+      Permanência até 08:48 · pico em Qua · Qui · Sex<br>
+      Base: painel “Rank 1.1” · turno noite (exceto suporte)
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>
